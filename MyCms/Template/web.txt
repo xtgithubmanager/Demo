@@ -1,0 +1,40 @@
+package com.xt.web.[smallBeanName];
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.xt.bean.[beanName];
+import com.xt.bean.XtParmas;
+import com.xt.service.[smallBeanName].I[beanName]Service;
+
+/**
+ * [description]
+ * [beanName]Control
+ * 创建人:[author]
+ * 时间：[date]
+ * @version 1.0.0
+ *
+ */
+@Controller
+@RequestMapping("/admin/[smallBeanName]")
+public class [beanName]Control {
+
+	@Autowired
+	private I[beanName]Service [smallBeanName]Service;
+
+	@RequestMapping("/list")
+	public String list(Model model, XtParmas parmas) {
+		List<[beanName]> cons = this.[smallBeanName]Service.find[beanName](parmas);
+		if (cons.size() > 0) {
+			model.addAttribute("[smallBeanName]s", cons);
+			return "[smallBeanName]/list";
+		} else {
+			return "error";
+		}
+	}
+
+}

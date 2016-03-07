@@ -1,0 +1,15 @@
+eclipse.preferences.version=1
+encoding//config/log4j.properties=UTF-8
+encoding//src/com/xt/core/BasePathExpsoer.java=UTF-8
+encoding//src/com/xt/core/ExamplePlugin.java=UTF-8
+encoding//src/com/xt/util=GBK
+encoding//src/com/xt/util/BooleanEditor.java=UTF-8
+encoding//src/com/xt/util/DateFormateEditor.java=UTF-8
+encoding//src/com/xt/util/GatherContentsUtil.java=UTF-8
+encoding//src/com/xt/util/ImageUtil.java=UTF-8
+encoding//src/com/xt/util/StringToDateConvert.java=UTF-8
+encoding//src/com/xt/util/TmFileUtil.java=UTF-8
+encoding//src/com/xt/util/TmStringUtils.java=UTF-8
+encoding//src/com/xt/util/XtConstant.java=UTF-8
+encoding//src/com/xt/util/ip=UTF-8
+encoding/<project>=UTF-8

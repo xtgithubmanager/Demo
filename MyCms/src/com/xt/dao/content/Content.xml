@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 内容操作的命名空间 -->
+<mapper namespace="com.xt.dao.content.IContentMapper">
+
+	<!-- 对文章的具体内容进行查询 -->
+	<select id="findContent" resultType="Content" parameterType="XtParmas">
+          SELECT
+			id,
+			title,
+			content,
+			create_time as createtime,
+			update_time as updatetime,
+			user_id as userid,
+			tag,
+			is_top as istop,
+			is_delete as isdelete,
+			status ,
+			channel_id as channelid,
+			img,
+			push,
+			is_comment as iscomment,
+			hits,
+			loves,
+			collections,
+			static_link as staticlink,
+			description,
+			subtitle,
+			type,
+			category_id as categoryid,
+			thumnail
+		FROM
+			xt_content 
+			    
+		<trim prefix="WHERE" prefixOverrides="AND | OR">  
+			<if test="@com.xt.util.TmStringUtils@isNotEmpty(channelid)">
+				and channel_id = #{channelid}
+			</if>
+			<if test="@com.xt.util.TmStringUtils@isNotEmpty(isdelete)">
+				and is_delete = #{isdelete}
+			</if>
+			<if test="@com.xt.util.TmStringUtils@isNotEmpty(keywords)">
+				and title LIKE '%${keywords}%'
+			</if>
+		</trim>
+		LIMIT #{pageNo} ,#{pageSize};				
+	</select>
+	
+	<!-- 查询数据的条数 -->
+	<select id="countContent" resultType="int" parameterType="XtParmas">
+          SELECT
+			count(1)
+		  FROM
+			xt_content 
+			    
+		<trim prefix="WHERE" prefixOverrides="AND | OR">  
+			<if test="@com.xt.util.TmStringUtils@isNotEmpty(channelid)">
+				and channel_id = #{channelid}
+			</if>
+			<if test="@com.xt.util.TmStringUtils@isNotEmpty(isdelete)">
+				and is_delete = #{isdelete}
+			</if>
+			<if test="@com.xt.util.TmStringUtils@isNotEmpty(keywords)">
+				and title LIKE '%${keywords}%'
+			</if>
+		</trim>			
+	</select>
+	
+	<!-- 更新内容的信息 -->
+	<update id="update" parameterType="Content">
+		update xt_content
+		<set>
+			<if test="isdelete!=null">is_delete = #{isdelete},</if>
+			<if test="status!=null">status = #{status},</if>
+			<if test="istop!=null">is_top = #{istop},</if>
+			<if test="push!=null">push = #{push},</if>
+			<if test="iscomment!=null">is_comment = #{iscomment},</if>
+		</set>
+		where id=#{id}
+	</update>
+	
+	<!--删除内容的操作 -->
+	<update id="delete" parameterType="XtParmas">
+		update xt_content set is_delete = 1 where id= #{id}
+	</update>
+	
+	
+	<!-- 添加内容的信息 通过采集进行添加内容的信息 -->
+	<insert id="saveContent"  parameterType="Content">
+			INSERT INTO xt_content
+			(
+				title,
+				subtitle,
+				content,
+				update_time,
+				user_id,
+				is_top,
+				is_delete,
+				status,
+				channel_id,
+				img,
+				push,
+				is_comment,
+				hits,
+				loves,
+				collections,
+				static_link,
+				keywords,
+				description,
+				tag,
+				comment,
+				thumnail,
+				type,
+				category_id
+			)VALUES(
+				#{title},
+				#{subtitle},
+				#{content},
+				#{updatetime},
+				#{userid},
+				#{istop},
+				#{isdelete},
+				#{status},
+				#{channelid},
+				#{img},
+				#{push},
+				#{iscomment},
+				#{hits},
+				#{loves},
+				#{collections},
+				#{staticlink},
+				#{keywords},
+				#{description},
+				#{tag},
+				#{comment},
+				#{thumnail},
+				#{type},
+				#{categoryid}
+			);
+	</insert>
+</mapper>

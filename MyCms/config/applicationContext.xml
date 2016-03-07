@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p" 
+	xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans   
+  http://www.springframework.org/schema/beans/spring-beans.xsd  
+  http://www.springframework.org/schema/context   
+  http://www.springframework.org/schema/context/spring-context-4.0.xsd
+  http://mybatis.org/schema/mybatis-spring 
+  http://mybatis.org/schema/mybatis-spring.xsd
+ ">
+ 
+ <!-- spring的配置文件 -->
+ 
+ <!-- 扫包 -->
+<!--  <context:component-scan base-package="com.xt.dao"></context:component-scan> -->
+ <context:component-scan base-package="com.xt.service"></context:component-scan>
+ <!-- 普通的读取对应属性文件 -->
+ <!--<context:property-placeholder location="classpath:db.properties" />-->
+ 
+ <!-- 引入对应的资源文件  用户名和加密后进行的操作 -->
+ <bean class="com.xt.core.des.EncryptPropertyPlaceholderConfigurer"
+	p:location="classpath:db.properties" p:fileEncoding="utf-8"></bean>
+ 
+ <!-- 数据源连接池的配置 配置对应alibaba的数据源 -->	
+ <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+    <property name="driverClassName" value="${jdbc.drivername}"></property>
+    <property name="username" value="${jdbc.uname}"></property>
+    <property name="password" value="${jdbc.pwd}"></property>
+    <property name="url" value="${jdbc.url}"></property>
+        <!-- 相关的初始化配置 -->
+    		<!-- 配置初始化大小、最小、最大 -->
+		<property name="initialSize"><value>1</value></property>
+	    <property name="maxActive"><value>5</value></property>
+	    <property name="minIdle"><value>1</value></property>
+	    <!-- 配置获取连接等待超时的时间 -->
+	    <property name="maxWait"><value>60000</value></property>
+	    <!-- 配置监控统计拦截的filters -->
+	    <property name="filters"><value>stat</value></property>
+		<!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+	    <property name="timeBetweenEvictionRunsMillis"><value>60000</value></property>
+	    <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+	    <property name="minEvictableIdleTimeMillis"><value>300000</value></property>
+</bean>
+
+<!-- 开始与mybatis集成 -->
+  
+  <!-- 初始化mybatis的sqlsessionfactory -->
+  <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+     <property name="dataSource" ref="dataSource"></property>
+     <!-- 扫描mapper对应的sql配置文件 -->
+     <property name="mapperLocations" value="classpath:com/xt/dao/*/*.xml"></property>
+     <!-- 扫描对应的实体包 进行取别名 -->
+     <property name="typeAliasesPackage" value="com.xt.bean"></property>
+     <!-- 扫描mybatis 的总配置文件 -->
+     <property name="configLocation" value="classpath:mybatis-config.xml"></property>
+  </bean>
+  
+  <!-- 不使用接口的时候使用下列方式 使用对应的mybatis的模版 -->
+<!--   <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate"> -->
+<!--      <constructor-arg ref="sqlSessionFactory"></constructor-arg> -->
+<!--   </bean> -->
+  
+  <!--使用mybatis的接口进行开发的时候使用如下-->
+  <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+    <property name="basePackage"  value="com.xt.dao"></property>
+  </bean> 
+  
+  <!--使用mybatis的接口开发进行简写的方式  上面和下面两种方式  对应的选择一种即可-->
+<!--   <mybatis:scan base-package="com.xt.dao"/> -->
+
+</beans>

@@ -1,0 +1,79 @@
+package [beanPackageName];
+
+import java.io.Serializable;
+import java.util.Date;
+
+/**
+ * 
+ * [description]
+ * [beanName]
+ * 创建人:[author]
+ * 时间：[date]
+ * @version 1.0.0
+ *
+ */
+public class [beanName]  implements Serializable{
+	private static final long serialVersionUID = 1L;
+	
+	private Integer id;//主键
+	private String name;//名字
+	private Date createtime;//创建时间
+	private Date updatetime;//更新时间
+	private Integer isdelete;//删除状态
+	private Integer sort;//进行排序
+	
+	
+	
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public Date getCreatetime() {
+		return createtime;
+	}
+	public void setCreatetime(Date createtime) {
+		this.createtime = createtime;
+	}
+	public Date getUpdatetime() {
+		return updatetime;
+	}
+	public void setUpdatetime(Date updatetime) {
+		this.updatetime = updatetime;
+	}
+	public Integer getIsdelete() {
+		return isdelete;
+	}
+	public void setIsdelete(Integer isdelete) {
+		this.isdelete = isdelete;
+	}
+	public Integer getSort() {
+		return sort;
+	}
+	public void setSort(Integer sort) {
+		this.sort = sort;
+	}
+	public [beanName](Integer id, String name, Date createtime, Date updatetime,
+			Integer isdelete, Integer sort) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.createtime = createtime;
+		this.updatetime = updatetime;
+		this.isdelete = isdelete;
+		this.sort = sort;
+	}
+	public [beanName]() {
+		super();
+	}
+	
+	
+	
+}

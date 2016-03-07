@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xt.dao.stat.IMyStatMapper" >
+     <select id="groupState" resultType="java.util.Map" parameterType="XtParmas">
+			SELECT
+				DATE_FORMAT(create_time,"%m") as m,
+				count(1)  as num
+				FROM xt_content
+				WHERE
+				DATE_FORMAT(create_time,"%Y") = #{year}
+			GROUP BY m 
+			ORDER BY m
+     </select>
+     
+     <select id="groupStatByMonth" resultType="java.util.Map" parameterType="XtParmas">
+		SELECT
+		id ,
+		title,
+		create_time
+		FROM xt_content
+		WHERE
+		DATE_FORMAT(create_time,'%m') = #{month}
+		ORDER BY #{order}
+		limit
+		#{pageNo},#{pageSize}
+     </select>
+     
+     
+     <select id="groupStatByMonthCount" resultType="java.lang.Integer" parameterType="XtParmas">
+       SELECT count(1) FROM xt_content WHERE DATE_FORMAT(create_time,'%m') = #{month}
+     </select>
+</mapper>

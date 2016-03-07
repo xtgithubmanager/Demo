@@ -1,0 +1,29 @@
+package com.xt.service.[smallBeanName].impl;
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.xt.bean.[beanName];
+import com.xt.bean.XtParmas;
+import com.xt.dao.[smallBeanName].I[beanName]Mapper;
+import com.xt.service.[smallBeanName].I[beanName]Service;
+
+/**
+ * 
+ * [description]
+ * [beanName]ServiceImp;
+ * 创建人:[author]
+ * 时间：[date]
+ * @version 1.0.0
+ *
+ */
+@Service
+public class [beanName]ServiceImpl implements I[beanName]Service {
+	@Autowired
+	private I[beanName]Mapper [smallBeanName]Mapper;
+	
+	@Override
+	public List<[beanName]> find[beanName](XtParmas parmas) {
+		return [smallBeanName]Mapper.find[beanName](parmas);
+	}
+}

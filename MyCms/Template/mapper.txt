@@ -1,0 +1,19 @@
+package com.xt.dao.[smallBeanName];
+import java.util.List;
+import com.xt.bean.[beanName];
+import com.xt.bean.XtParmas;
+
+/**
+ * 
+ * [description]
+ * I[beanName]Mapper
+ * 创建人:[author]
+ * 时间：[date]
+ * @version 1.0.0
+ *
+ */
+public interface I[beanName]Mapper {
+
+	public List<[beanName]> find[beanName](XtParmas parmas);
+
+}

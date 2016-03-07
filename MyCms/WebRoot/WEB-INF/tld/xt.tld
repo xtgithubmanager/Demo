@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+	version="2.0">
+	<description>jsp自定义标签</description>
+	<display-name>自定义标签-函数形式的标签</display-name>
+	<tlib-version>1.0</tlib-version>
+	<short-name>xt</short-name><!--标签的名称没有什么关系可以任意定义 -->
+	<uri></uri>
+	<!--标签自定义查询 复用性更好 -->
+
+	<!-- jsp的自定义标签 -->
+	<!-- 格式化日期 -->
+	<function>
+		<!-- 对业务的描述 格式化日期 -->
+		<description>格式化日期</description>
+		<!-- 标签的名称和对应的方法名相同，对应 -->
+		<name>formatdate</name>
+		<!--代表标签类 -->
+		<function-class>com.xt.tag.XtFunctions</function-class>
+		<!--对应执行的方法的名称，和返回值  （特别注意标签的类型和返回值必须在同一行） -->
+		<function-signature>java.lang.String formatdate(java.util.Date,java.lang.String)</function-signature>
+		<example>举例: ${xt:formatdate(new Date(),'yyyy-MM-dd HH:mm:ss')}</example>
+	</function>
+	
+
+	<!-- 日期中文格式化 -->
+	<function>
+		<description>日期汉化</description>
+		<name>getTimeFormat</name>
+		<function-class>com.xt.tag.XtFunctions</function-class>
+		<function-signature>java.lang.String getTimeFormat(java.util.Date)</function-signature>
+	</function>
+	
+	<!-- 索引是否存在字符串 -->
+	<function>
+		<description>索引是否存在字符串</description>
+		<name>indexOf</name>
+		<function-class>com.xt.tag.XtFunctions</function-class>
+		<function-signature>java.lang.Integer indexOf(java.lang.String,java.lang.String)</function-signature>
+	</function>
+	
+	
+
+</taglib>

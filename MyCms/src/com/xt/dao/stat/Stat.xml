@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xt.dao.stat.IStatMapper" >
+    
+    <!-- 查询后台日志的信息 -->
+	<select id="findStat" resultType="Stat" parameterType="XtParmas">
+		select
+		id,
+		classname,
+		create_time as createtime,
+		userid,
+		methodname,
+		time,
+		ipaddress,
+		ip,
+		model,
+		username,
+		description
+		FROM
+		xt_stat
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="@com.xt.util.TmStringUtils@isNotEmpty(classname)">
+				classname LIKE '%${keywords}%'
+			</if>
+		</trim>
+		LIMIT #{pageNo} ,#{pageSize};
+	</select>
+
+	
+	<!-- 保存后台日志的信息 -->
+	<insert id="save"  parameterType="Stat">
+	 INSERT INTO xt_stat(
+		classname,
+		userid,
+		methodname,
+		time,
+		ipaddress,
+		ip,
+		model,
+		username,
+		description)
+		VALUES(
+		    #{classname},
+			#{userid},
+			#{methodname},
+			#{time},
+			#{ipaddress},
+			#{ip},
+			#{model},
+			#{username},
+			#{description}
+		);
+	</insert>
+	
+</mapper>

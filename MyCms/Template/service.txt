@@ -1,0 +1,19 @@
+package com.xt.service.[smallBeanName];
+import java.util.List;
+import com.xt.bean.[beanName];
+import com.xt.bean.XtParmas;
+
+/**
+ * 
+ * [description]
+ * I[beanName]Service
+ * 创建人:[author]
+ * 时间：[date]
+ * @version 1.0.0
+ *
+ */
+public interface I[beanName]Service {
+	
+	public List<[beanName]> find[beanName](XtParmas parmas);
+
+}

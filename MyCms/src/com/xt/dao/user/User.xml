@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 用户操作的命名空间 -->
+<mapper namespace="com.xt.dao.user.IUserMapper">
+	<!-- 查询用户进行登录 -->
+ 	<select id="findUser"  resultType="User" parameterType="XtParmas">
+		SELECT 
+		id,username,account,password,address,isdelete
+		FROM
+		xt_user
+ 		WHERE account = #{account} and password = #{password} and isdelete = 0
+	</select>
+
+
+    <!-- 查询管理所有用户的信息 -->
+	<select id="findAllUser" resultType="User" parameterType="XtParmas">
+		SELECT
+		id,
+		username,
+		account,
+		password,
+		isdelete,
+		address,
+		create_time as
+		createtime,
+		update_time as updatetime,
+		male,
+		birthday,
+		head_img as headimg
+		FROM
+		xt_user
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="@com.xt.util.TmStringUtils@isNotEmpty(password)">
+				and password = #{password}
+			</if>
+		    <if test="@com.xt.util.TmStringUtils@isNotEmpty(isdelete)">
+				and isdelete = #{isdelete}
+			</if>
+			<if test="@com.xt.util.TmStringUtils@isNotEmpty(keywords)">
+				and account like '%${keywords}%'
+			</if>
+		</trim>
+		LIMIT #{pageNo} ,#{pageSize};
+	</select>
+
+    <!-- 查询用户的总是 -->
+	<select id="countUser" resultType="int" parameterType="XtParmas">
+		SELECT
+		count(1)
+		from
+		xt_user
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="@com.xt.util.TmStringUtils@isNotEmpty(password)">
+				and password = #{password}
+			</if>
+			<if test="@com.xt.util.TmStringUtils@isNotEmpty(isdelete)">
+				and isdelete = #{isdelete}
+			</if>
+			<if test="@com.xt.util.TmStringUtils@isNotEmpty(keywords)">
+				and account like '%${keywords}%'
+			</if>
+		</trim>
+	</select>
+	
+	
+    <!-- 更新内容的信息 -->
+	<update id="update" parameterType="User">
+		update xt_user
+		<set>
+			<if test="isdelete!=null">isdelete = #{isdelete},</if>
+		</set>
+		where id=#{id}
+	</update>
+	
+	<!-- 删除内容的信息 -->
+	<update id="delete"  parameterType="XtParmas">
+	   update xt_user set isdelete = 1 where id = #{id}
+	</update>
+	
+	
+</mapper>
