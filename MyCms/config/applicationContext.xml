@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:p="http://www.springframework.org/schema/p" 
+	xmlns:task="http://www.springframework.org/schema/task"  
 	xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans   
   http://www.springframework.org/schema/beans/spring-beans.xsd  
@@ -9,6 +11,8 @@
   http://www.springframework.org/schema/context/spring-context-4.0.xsd
   http://mybatis.org/schema/mybatis-spring 
   http://mybatis.org/schema/mybatis-spring.xsd
+  http://www.springframework.org/schema/task
+   http://www.springframework.org/schema/task/spring-task-4.0.xsd
  ">
  
  <!-- spring的配置文件 -->
@@ -69,5 +73,4 @@
   
   <!--使用mybatis的接口开发进行简写的方式  上面和下面两种方式  对应的选择一种即可-->
 <!--   <mybatis:scan base-package="com.xt.dao"/> -->
-
 </beans>
