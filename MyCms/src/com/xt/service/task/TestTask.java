@@ -4,7 +4,7 @@ package com.xt.service.task;
 public class TestTask {
 //	@Scheduled(cron = "1/1 * * * * ?")
 //	public void job(){
-//		System.out.println("对应的任务正在执行");
+//		System.out.println("对应的任务正在执行唉唉");
 //	}
 
 }
